@@ -16,7 +16,7 @@
 
                     <h5>You are logged in!</h5>
 
-                    <h6> You have {{$post_count}} uploaded post(s).</h6>
+                    {{-- <h6> You have {{$post_count}} uploaded post(s).</h6> --}}
                 </div>
             </div>
         </div>

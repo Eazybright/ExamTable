@@ -17,11 +17,11 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-// Route::group(['middleware' => ['auth']], function(){
-//     Route::resource('post', 'PostController');
-//     Route::get('addUser', 'UserController@index')->name('add.user');
-//     Route::post('saveUser', 'UserController@saveUser')->name('save.user');
-// });
+Route::group(['middleware' => ['auth']], function(){
+    Route::resource('category', 'CategoryController')->only(['index', 'store', 'destroy']);
+    // Route::get('addUser', 'UserController@index')->name('add.user');
+    // Route::post('saveUser', 'UserController@saveUser')->name('save.user');
+});
 
 Auth::routes();
 

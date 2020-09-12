@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/custom_style.css')}}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -35,22 +37,20 @@
                     <ul class="navbar-nav ml-lg-5">
                         @if(Auth::check())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('post.create')}}">
-                                    Add Post
+                                <a class="nav-link" href="#">
+                                    Add Question
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('post.index')}}">
-                                    View My Posts
+                                <a class="nav-link" href="#">
+                                    View My Questions
                                 </a>
                             </li>
-                            {{-- @if(auth()->check() && auth()->user()->hasRole(['admin'])) --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('add.user')}}">
-                                    Add User
+                                <a class="nav-link" href="{{route('category.index')}}">
+                                    Add Category
                                 </a>
                             </li>
-                            {{-- @endif --}}
                         @endif
                     </ul>
 
@@ -96,5 +96,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('scripts')
 </body>
 </html>
