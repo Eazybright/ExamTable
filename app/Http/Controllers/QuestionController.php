@@ -26,7 +26,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $questions = $this->question_repo->get();
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -79,28 +80,6 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -109,7 +88,23 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //validate request
+         $this->validate($request, array(
+            'question' => 'string|required',
+            'category_id' => 'numeric|required',
+            'option_1' => 'string|required',
+            'option_2' => 'string|required',
+            'option_3' => 'string|required',
+            'option_4' => 'string|required'
+        ));
+
+        $update_question = $this->question_repo->update($request, $id);
+
+        if($update_question == true){
+            return redirect()->back()->with('success', 'Question updated successfully');
+        }
+
+        return redirect()->back()->with('error', 'An error occurred. Question not Updated. Please try again');
     }
 
     /**
@@ -120,6 +115,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_question = $this->question_repo->delete($id);
+        
+       if($delete_question == true){
+            return redirect('questions')->with('success', 'Question deleted successfully!');
+       }
+       return redirect()->back()->with('error', 'An error occurred, question not deleted');
     }
 }

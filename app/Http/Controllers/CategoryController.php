@@ -34,8 +34,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-         //validate request
-         $this->validate($request, array(
+        //validate request
+        $this->validate($request, array(
             'name' => 'required|max:255|unique:categories,name',
         ));
         

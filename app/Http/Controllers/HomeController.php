@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Repositories\Interfaces\PostRepositoryInterface;
+use App\Repositories\Interfaces\QuestionRepositoryInterface;
 
 class HomeController extends Controller
 {
-    // protected $post_repo;
+    protected $question_repo;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(QuestionRepositoryInterface $question_repo)
     {
         $this->middleware('auth');
+        $this->question_repo = $question_repo;
     }
 
     /**
@@ -26,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $user_id = auth()->user()->id;
-        // $post_count = $this->post_repo->countUserPost($user_id);
-        return view('home');
+        $user_id = auth()->user()->id;
+        $question_count = $this->question_repo->countUserQuestions($user_id);
+        return view('home', compact('question_count'));
     }
 }

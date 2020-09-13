@@ -20,9 +20,5 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             QuestionRepositoryInterface::class, QuestionRepository::class
         );
-
-        // $this->app->bind(
-        //     RoleRepositoryInterface::class, RoleRepository::class
-        // );
     }
 }

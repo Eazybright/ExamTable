@@ -5,7 +5,7 @@
         <div class="col-md-8 ml-5">
             <h1>All Categories</h1>
         
-            <table class="table table-responsive table-hover">gi
+            <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
                         <th>#</th>

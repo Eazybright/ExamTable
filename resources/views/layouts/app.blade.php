@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('css/custom_style.css')}}" rel="stylesheet">
-    @yield('styles')
+    @yield('styles') 
 </head>
 <body>
     <div id="app">
@@ -42,7 +42,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{route('questions.index')}}">
                                     View My Questions
                                 </a>
                             </li>

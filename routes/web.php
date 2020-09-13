@@ -19,9 +19,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('category', 'CategoryController')->only(['index', 'store', 'destroy']);
-    Route::resource('questions', 'QuestionController');
-    // Route::get('addUser', 'UserController@index')->name('add.user');
-    // Route::post('saveUser', 'UserController@saveUser')->name('save.user');
+    Route::resource('questions', 'QuestionController')->except(['show', 'edit']);
 });
 
 Auth::routes();

@@ -14,9 +14,12 @@
                         </div>
                     @endif
 
-                    <h5>You are logged in!</h5>
+                    <h5>Welcome {{auth()->user()->name}}, You are logged in!</h5>
 
-                    {{-- <h6> You have {{$post_count}} uploaded post(s).</h6> --}}
+                    <h6> You have 
+                        <a href="{{route('questions.index')}}">{{$question_count}}</a>
+                         uploaded question(s).
+                    </h6>
                 </div>
             </div>
         </div>
