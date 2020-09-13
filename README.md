@@ -1,8 +1,9 @@
 ## Examtable
-* This is a test case for implementing roles and permissions
+* This is a technical task to analyze my logical and technical skills with using Laravel web framework
 
 ## Introduction
-
+This task is a CRUD application to add many exam questions with four options on each question.
+The question has different categories like technical, aptitude, and logical. The questions are displayed on the page in a categorized manner.
 
 
 #### Database Setup
@@ -26,7 +27,13 @@ DB_PORT=3306
 DB_DATABASE=YOUR_DATABASE_NAME
 DB_USERNAME=YOUR_MYSQL_USERNAME
 DB_PASSWORD=YOUR_MYSQL_PASSWORD
-```git stat
+```
+
+Go to `database\seeds\DatabaseSeeder.php` file and uncomment this line
+```php
+    // $this->call(CategorySeeder::class);
+```
+then run `php artisan db:seed` to seed the `categories` database table.
 
 ### Running the app
 * `cd` into the project folder (if you're not already there)
