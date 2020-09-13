@@ -14,8 +14,6 @@
                     <hr>
                     <p id="error-message"></p>
 
-                    
-
                     <form id="questionForm" data-parsley-validate>
                         @csrf
                         <div class="form-group">
@@ -23,11 +21,6 @@
                             <div>
                                 <textarea required class="form-control" rows="3" name="question" id="question"></textarea>
                             </div>
-                            @if ($errors->has('body'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('body') }}</strong>
-                                </span>
-                            @endif
                         </div>
 
                         {{ Form::label('category_id', 'Category:', ['class'=> 'mt-10'])}}
@@ -37,11 +30,6 @@
                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
                         </select><br>
-                        @if ($errors->has('category_id'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('category_id') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="option_1">First Option</label>
@@ -49,11 +37,6 @@
                                 <input type="text" id="option_1" name="option_1"
                                         class="form-control" required placeholder="First Option"/>
                             </div>
-                            @if ($errors->has('option_1'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('option_1') }}</strong>
-                                </span>
-                            @endif
                         </div>    
                         
                         <div class="form-group">
@@ -62,11 +45,6 @@
                                 <input type="text" id="option_2" name="option_2"
                                         class="form-control" required placeholder="Second Option"/>
                             </div>
-                            @if ($errors->has('option_2'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('option_2') }}</strong>
-                                </span>
-                            @endif
                         </div>                        
 
                         <div class="form-group">
@@ -75,11 +53,6 @@
                                 <input type="text" id="option_3" name="option_3"
                                         class="form-control" required placeholder="Third Option"/>
                             </div>
-                            @if ($errors->has('option_3'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('option_3') }}</strong>
-                                </span>
-                            @endif
                         </div>                        
 
                         <div class="form-group">
@@ -88,11 +61,6 @@
                                 <input type="text" id="option_4" name="option_4"
                                         class="form-control" required placeholder="Fourth Option"/>
                             </div>
-                            @if ($errors->has('option_4'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('option_4') }}</strong>
-                                </span>
-                            @endif
                         </div>       
 
                         <div class="form-group">
@@ -129,7 +97,7 @@
                 option_two = $('#option_2').val();
                 option_three = $('#option_3').val();
                 option_four = $('#option_4').val();
-                console.log(question, category_id, option_one, option_two, option_three, option_four);
+                // console.log(question, category_id, option_one, option_two, option_three, option_four);
 
                 $.ajax({
                     method: "POST",
@@ -146,17 +114,25 @@
                         'option_four': option_four
                     },
                     success: function(response){ // What to do if we succeed
-                        // if(response.status == true){
-
-                            
-                        // }
-                        console.log(response);
+                        if(response.status == true){
+                            $('#error-message').show()
+                            $('#error-message').html('<span class="alert alert-success">'+`${response.message}`+'</span><br>')
+                            $('#questionForm')[0].reset();
+                        }
+                        // console.log(response);
                     },
                     error: (jqXHR, textStatus) => {
-                        var dError = jqXHR.responseJSON.data.error;
+                        var dError;
+                        if(jqXHR.status == 422){
+                            dError = jqXHR.responseJSON.data.error;
+                            $('#error-message').show()
+                            $('#error-message').html('<span class="alert alert-danger">'+`${dError}`+'</span><br>') 
+                            // console.log(dError)
+                        }                  
+                        dError = jqXHR.responseJSON.data.error;
                         $('#error-message').show()
-                        $('#error-message').html('<span class="alert alert-danger">'+`${dError[1]}`+'</span>') 
-                        console.log(dError)
+                        $('#error-message').html('<span class="alert alert-danger">'+`${dError}`+'</span><br>') 
+                        // console.log(dError)      
                     }
                 });
             });

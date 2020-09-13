@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\QuestionRepositoryInterface;
 
 class QuestionController extends Controller
 {
     protected $category_repo;
+    protected $question_repo;
 
-    public function __construct(CategoryRepositoryInterface $category_repo)
+    public function __construct(CategoryRepositoryInterface $category_repo,
+                                QuestionRepositoryInterface $question_repo)
     {
         $this->category_repo = $category_repo;
+        $this->question_repo = $question_repo;
     }
 
     /**
@@ -49,17 +53,29 @@ class QuestionController extends Controller
             'category_id' => 'numeric|required',
             'option_one' => 'string|required',
             'option_two' => 'string|required',
-            'option_three' => 'numeric|required',
-            'option_four' => 'numeric|required'
+            'option_three' => 'string|required',
+            'option_four' => 'string|required'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(
-                ['data' => ['error' => $validator->errors()]],
-                 422);
+            return response()->json([
+                        'data' => ['error' => json_encode($validator->errors())]
+                    ], 422);
         }
 
-
+        $user_id = auth()->user()->id;
+        $save_question = $this->question_repo->save($request, $user_id);
+        
+        if($save_question == true){
+            return response()->json([
+                        'status' => true,
+                        'message' => 'Question saved successfully'
+                    ], 200);
+        }
+        return response()->json([
+                    'status' => false,
+                    'message' => 'An error occurred. Question not saved. Please try again'
+                ], 500);
     }
 
     /**
