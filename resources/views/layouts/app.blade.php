@@ -37,7 +37,7 @@
                     <ul class="navbar-nav ml-lg-5">
                         @if(Auth::check())
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{route('questions.create')}}">
                                     Add Question
                                 </a>
                             </li>

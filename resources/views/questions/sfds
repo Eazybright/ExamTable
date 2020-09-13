@@ -1,0 +1,67 @@
+
+    <script>
+        $('#questionForm').submit(function(e){
+            e.preventDefault();
+            // var count = $('#countloop').val();
+            // var num = Number(count);
+            // var value = [];
+            console.log($('#questionForm'))
+            
+            // if(num){
+            //     for(var i = 1; i <= num; i++){
+            //         var code, id, brand, serial_number, val_figure, status, name, date, remark, region_name;
+            //         code = $('#pump_code'+i).val();
+            //         val_figure = $('#val_figure'+i).val();
+            //         status = $('#statusOption'+i).val();
+            //         name = $('#station_name'+i).val();
+            //         remark = $('#remark'+i).val();
+            //         region_name = $('#region_name'+i).val();
+            //         var data = {
+            //             'pump_code': code,
+            //             'val_figure': val_figure,
+            //             'pump_status': status,
+            //             'station_name': name,
+            //             'remark': remark,
+            //             'region_name': region_name
+            //         }
+            //         value.push(data);
+            //     }
+                // $.ajax({
+                //     method: "POST",
+                //     url: "/stations/save",
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     },
+                //     data: {
+                //         'value': value,
+                //         'date': date,
+                //         'station': name
+                //     },
+                //     success: function(response){ // What to do if we succeed
+                //         if(response.status == true){
+                //             successToastMsg = 'Validation Exercise successfully saved';
+                //             successToast(successToastMsg);
+                //             window.location.href = "{{route('stations')}}";
+                //         }if(response.status == false){
+                //             // window.location.href = "{{route('stations')}}";
+                //             failedToastMsg = 'Validation exercise done for the selected station and date. Please select a new date';
+                //             failToast(failedToastMsg);
+                //         }
+                //         console.log(response);
+                //     },
+                //     error: (error) => {
+                //         if(error){
+                //             failedToastMsg = 
+                //                 'Validation exercise not successful \n' +
+                //                 '1.) Please make sure all required fields are filled correctly. \n' +
+                //                 '2.) The station has a region name registered on station manager platform. \n' +
+                //                 '3.) You have active internet connection';
+                //             failToast(failedToastMsg);
+                //             var err = error;
+                //             console.log(err);
+                //         }
+                //     }
+                // });
+            // }
+        });
+    </script>
