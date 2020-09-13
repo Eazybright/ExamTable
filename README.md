@@ -28,6 +28,7 @@ DB_DATABASE=YOUR_DATABASE_NAME
 DB_USERNAME=YOUR_MYSQL_USERNAME
 DB_PASSWORD=YOUR_MYSQL_PASSWORD
 ```
+* Run `php artisan migrate` to create the database tables.
 
 Go to `database\seeds\DatabaseSeeder.php` file and uncomment this line
 ```php
